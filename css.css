@@ -1,0 +1,10 @@
+.row{
+    height: 25px;
+    float: left;
+}
+
+.tile{
+    height: 25px;
+    width: 25px;
+    background-color: grey;
+}
