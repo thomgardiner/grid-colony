@@ -5,16 +5,13 @@ document.addEventListener("DOMContentLoaded", function(){
     let rowsX = 30;
     let grid = [];
 
-    class tileConstructor {
+    class tile{
         constructor(state, floor, objects){
             this.state = state;
             this.floor = floor;
             this.objects = objects;
         }
     }
-
-
-
 
     //grid tile creation
 
@@ -25,7 +22,7 @@ document.addEventListener("DOMContentLoaded", function(){
     
         grid.forEach(function(row, index){
             for(i=0 ; i < rowsX; i++){
-                row.push(new tileConstructor('Empty', 'Dirt', []));
+                row.push(new tile('Empty', 'Dirt', []));
             }
         })
     
@@ -60,6 +57,13 @@ document.addEventListener("DOMContentLoaded", function(){
     
     const getTileInfo = function(y, x){
         console.log(grid[y][x]);
+
+        let tileInfo = document.getElementById("tile-coord");
+        tileInfo.textContent = y + "-" + x;
+
+        let floorInfo = document.getElementById('floor-info');
+        floorInfo.textContent = grid[y][x].floor;
+
     }
 
     const renderTiles = function(){
@@ -70,13 +74,12 @@ document.addEventListener("DOMContentLoaded", function(){
 
                 switch(tile.floor){
                     case 'Dirt':
-                        rTile.setAttribute('style', 'background-color: brown');
+                        rTile.setAttribute('style', 'background-color: #594408');
                         break;
 
                     case 'Grass':
                         rTile.setAttribute('style', 'background-color: green');
                         break;
-
                 }
             })
         })
