@@ -13,53 +13,61 @@ document.addEventListener("DOMContentLoaded", function(){
         }
     }
 
+
+
+
     //grid tile creation
 
-    for(i = 0; i < rowsY; i++){
-        grid.push([]);
+    const initializeGrid = function(){
+        for(i = 0; i < rowsY; i++){
+            grid.push([]);
+        }
+    
+        grid.forEach(function(row, index){
+            for(i=0 ; i < rowsX; i++){
+                row.push(new tileConstructor('Empty', 'Dirt', []));
+            }
+        })
+    
+        let container = document.getElementById('container');
+        console.log(container);
+    
+        grid.forEach(function(row, index){
+            let gridRow = document.createElement('div');
+            gridRow.setAttribute('id', 'row-' + index);
+            gridRow.setAttribute('class', 'row');
+            container.append(gridRow);
+        });
+    
+        grid.forEach(function(row, index){
+    
+            row.forEach(function(tile, index1){
+                let gridTile = document.createElement('div');
+                gridTile.setAttribute('id', index + '-' + index1);
+                gridTile.setAttribute('class', 'tile');
+                gridTile.addEventListener("click", () => getTileInfo(index, index1));
+    
+    
+                let gridRow = document.getElementById('row-' + index);
+                gridRow.append(gridTile);
+            })
+        });
+
     }
 
-    grid.forEach(function(row, index){
-        for(i=0 ; i < rowsX; i++){
-            row.push(new tileConstructor('Empty', 'Dirt', []));
-        }
-    })
-
-    console.log(grid);
-    console.log(grid[5][3]);
-
-    let container = document.getElementById('container');
-    console.log(container);
-
-    grid.forEach(function(row, index){
-        let gridRow = document.createElement('div');
-        gridRow.setAttribute('id', 'row-' + index);
-        gridRow.setAttribute('class', 'row');
-        container.append(gridRow);
-    });
-
-    grid.forEach(function(row, index){
-
-        row.forEach(function(tile, index1){
-            let gridTile = document.createElement('div');
-            gridTile.setAttribute('id', index + '-' + index1);
-            gridTile.setAttribute('class', 'tile');
-            let gridRow = document.getElementById('row-' + index);
-            gridRow.append(gridTile);
-        })
-    });
-
+    //render tiles based on tile parameters
 
     
+    const getTileInfo = function(y, x){
+        console.log(grid[y][x]);
+    }
 
     const renderTiles = function(){
         
         grid.forEach(function(row, y){
             row.forEach(function(tile, x){
-                console.log(tile);
                 let rTile = document.getElementById(y + '-' + x);
 
-            
                 switch(tile.floor){
                     case 'Dirt':
                         rTile.setAttribute('style', 'background-color: brown');
@@ -75,13 +83,39 @@ document.addEventListener("DOMContentLoaded", function(){
     }
 
 
+    initializeGrid();
+
     grid[5][3].floor = 'Grass';
+    grid[5][4].floor = 'Grass';
+    grid[5][5].floor = 'Grass';
+    grid[5][6].floor = 'Grass';
+    grid[5][7].floor = 'Grass';
+    grid[6][3].floor = 'Grass';
+    grid[6][4].floor = 'Grass';
+    grid[6][5].floor = 'Grass';
+    grid[6][6].floor = 'Grass';
+    grid[6][7].floor = 'Grass';
+    grid[7][3].floor = 'Grass';
+    grid[7][4].floor = 'Grass';
+    grid[7][5].floor = 'Grass';
+    grid[7][6].floor = 'Grass';
+    grid[7][7].floor = 'Grass';
+    grid[8][3].floor = 'Grass';
+    grid[8][4].floor = 'Grass';
+    grid[8][5].floor = 'Grass';
+    grid[8][6].floor = 'Grass';
+    grid[8][7].floor = 'Grass';
+    grid[9][3].floor = 'Grass';
+    grid[9][4].floor = 'Grass';
+    grid[9][5].floor = 'Grass';
+    grid[9][6].floor = 'Grass';
+    grid[9][7].floor = 'Grass';
+    grid[10][3].floor = 'Grass';
+    grid[10][4].floor = 'Grass';
+    grid[10][5].floor = 'Grass';
+    grid[10][6].floor = 'Grass';
+    grid[10][7].floor = 'Grass';
     
-
-
-
-
-
     renderTiles();
 
 
